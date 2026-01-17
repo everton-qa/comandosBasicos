@@ -1,0 +1,21 @@
+# node
+node_modules/
+
+# cypress
+cypress/videos/
+cypress/screenshots/
+
+# build / cache
+dist/
+build/
+.cache/
+
+# logs
+npm-debug.log*
+yarn-error.log*
+
+# env
+.env
+
+# vscode
+.vscode/
