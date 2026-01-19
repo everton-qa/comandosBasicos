@@ -16,7 +16,7 @@ describe('Comandos Basicos', () => {
         cy.visit('https://automationpratice.com.br/login')
         cy.get('#user').type('vertin@gmail.com')
     })
-
+    
     it('clicar em um elemento', () => {
         cy.visit('https://automationpratice.com.br/login')
         cy.get('#btnLogin').click()
@@ -36,9 +36,36 @@ describe('Comandos Basicos', () => {
         cy.get('#css').check()
     })
 
-    it('Validação de teste', () => {
-        cy.visit('https://automationpratice.com.br/login') 
-        cy.get('#user').should('be.visible')
-
+    it('Validação de texto', () => {
+        cy.visit('https://automationpratice.com.br/login')
+        cy.get('#createAccount')
+            .should('be.visible')
+            .should('contain', 'Ainda não tem conta?')
     })
+    it('Login Válido', () => {
+        cy.visit('https://automationpratice.com.br/login')
+        cy.get('#user').type('vertin@gmail.com')
+        cy.get('#password').type('123456')
+        cy.get('#btnLogin').click()
+        cy.get('.swal2-confirm')
+            .should('be.visible')
+    })
+
+    it('Login Inválido', () => {
+        cy.visit('https://automationpratice.com.br/login')
+        cy.get('#user').click();
+        cy.get('#user').type('vertin123@hotmail.com');
+        cy.get('#btnLogin').click();
+        cy.get('.invalid_input').should('be.visible');
+    });
+
+it('Login sem Senha',() => {
+    cy.visit('https://automationpratice.com.br/login')
+    
+    cy.get('#user').click();
+    cy.get('#user').type('euller!gmail.com');
+    cy.get('#btnLogin').click();
+    cy.get('.invalid_input').should('be.visible'); 
+});
+
 })
